@@ -1,6 +1,7 @@
 package junit.test;
 
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -10,23 +11,36 @@ import javax.persistence.Query;
 import org.junit.Before;
 import org.junit.Test;
 
+import com.fsnc.domain.Order;
+import com.fsnc.domain.OrderItem;
 import com.fsnc.domain.User;
+import com.google.common.collect.Sets;
 
-public class UserTest {
+public class OrderTest {
 
 	@Before
 	public void setUp() throws Exception {
 	}
 
 	@Test
-	public void testAddUser() {
+	public void testAddOrder() {
 		EntityManagerFactory emf = Persistence.createEntityManagerFactory("jpa");
 		EntityManager em = emf.createEntityManager();
 		try {
 			em.getTransaction().begin();
-			User user = new User();
-			user.setUserName("admin");
-			em.persist(user);
+			Order order = new Order();
+			order.setOrderNo("2016081524#123");
+			order.setDescription("机票订单");
+			
+			OrderItem orderItem = new OrderItem();
+			orderItem.setItemName("深圳去长沙的机票");
+			orderItem.setPrice(234.00D);
+			
+			Set<OrderItem> orderItems = Sets.newHashSet();
+			orderItems.add(orderItem);
+			
+			order.setOrderItems(orderItems);
+			em.persist(order);
 			em.getTransaction().commit();
 		} catch (Exception e) {
 			e.printStackTrace();

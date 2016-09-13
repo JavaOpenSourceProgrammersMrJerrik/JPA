@@ -1,0 +1,26 @@
+<persistence xmlns="http://java.sun.com/xml/ns/persistence"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/persistence
+          http://java.sun.com/xml/ns/persistence/persistence_1_0.xsd"
+	version="1.0">
+
+	<persistence-unit name="jpa" transaction-type="RESOURCE_LOCAL">
+		<properties>
+			<property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver" />
+			<property name="hibernate.temp.use_jdbc_metadata_defaults" value="false" />
+			<!-- 驱动类型:数据库类型:thin:@ip地址:端口:监听器名称 -->
+			<property name="hibernate.connection.url" value="jdbc:mysql://localhost:3306/jpa" />
+			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5Dialect" />
+			<!-- 访问数据库用户 -->
+			<property name="hibernate.connection.username" value="root" />
+			<!-- 访问数据库密码 -->
+			<property name="hibernate.connection.password" value="root" />
+			<!--create是建表、清空数据库数据 update可以修改表中的数据、可以修改表结构、不可以建表 none只可以修改表中的数据，不编辑表结构 -->
+			<property name="hibernate.hbm2ddl.auto" value="update" />
+			<!-- 显示sql语句 -->
+			<property name="hibernate.show_sql" value="true" />
+			<!-- 输出格式化后的sql,更方便查看 -->
+			<property name="hibernate.format_sql" value="true" />
+		</properties>
+	</persistence-unit>
+</persistence>
